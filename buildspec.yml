@@ -1,8 +1,13 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-version:
+      java: corretto17
   pre_build:
     commands:
+      - echo gradle build
+      - ./gradlew build
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 347192894377.dkr.ecr.ap-northeast-2.amazonaws.com
