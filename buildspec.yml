@@ -11,7 +11,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 347192894377.dkr.ecr.ap-northeast-2.amazonaws.com
-      - REPOSITORY_URI=347192894377.dkr.ecr.ap-northeast-2.amazonaws.com/demo
+      - REPOSITORY_URI=347192894377.dkr.ecr.ap-northeast-2.amazonaws.com/cdk-java-test
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
@@ -31,4 +31,4 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
-    - target/*SNAPSHOT.jar
+    - build/libs/*SNAPSHOT.jar
